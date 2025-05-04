@@ -1,5 +1,4 @@
 #include <string>
-#include <utility>
 #include <vector>
 
 enum ColumnType {
@@ -25,9 +24,9 @@ class Table {
     std::string name;
     std::vector<Column> columns;
 public:
-    Table(std::string  n) : name(n) {}
+    Table(std::string const& n) : name(n) {}
 
-    auto add_column(std::string n, ColumnType t) -> void {
+    auto add_column(std::string const& n, ColumnType const& t) -> void {
         columns.push_back(Column(n, t));
     }
 };
