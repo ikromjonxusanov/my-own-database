@@ -5,6 +5,10 @@ set(CMAKE_CXX_STANDARD 20)
 
 include(FetchContent)
 
+include_directories(include)
+
+file(GLOB SOURCES "src/*.cpp")
+
 FetchContent_Declare(
         fmt
         GIT_REPOSITORY https://github.com/fmtlib/fmt
@@ -14,7 +18,7 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(fmt)
 
-add_executable(Database main.cpp
-        database.cpp)
+add_executable(Database ${SOURCES}
+        include/database.h)
 target_link_libraries(Database fmt)
 
