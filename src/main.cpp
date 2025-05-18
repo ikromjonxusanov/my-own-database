@@ -1,48 +1,63 @@
+#include <filesystem>
+#include <fstream>
 #include <fmt/base.h>
-#include <fmt/ranges.h>
 #include <iostream>
 #include <string>
 #include <vector>
-#include "database.h"
+#include "helpers.h"
 
-auto toLowerCase(std::string& str) -> void {
-    for (auto& c : str) {
-        c = std::tolower(c);
+
+
+#include <iostream>
+#include <regex>
+#include <string>
+#include "helpers.h"
+#include "handlers.h"
+
+
+auto execute(std::string const& input) {
+    std::string query = toLowerCase(input);
+
+    query = std::regex_replace(query, std::regex(R"(^\s+|\s+$|;$)"), "");
+
+    if (query.starts_with("create table")) {
+        createTableHandler(query);
+    } else if (query.starts_with("alter table")) {
+        alterTableHandler(query);
+    } else if (query.starts_with("drop table")) {
+        dropTableHandler(query);
+    } else if (query.starts_with("select")) {
+        selectHandler(query);
+    } else if (query.starts_with("update")) {
+        updateHandler(query);
+    } else if (query.starts_with("delete")) {
+        deleteHandler(query);
+    } else if (query.starts_with("insert into")) {
+        insertIntoHandler(query);
+    } else {
+        std::cout << "[ERROR] Unsupported or invalid SQL command.\n";
     }
 }
 
-
-auto execute(std::vector<std::string> const& query) -> void {
-    fmt::println("{}", query);
-    if (query.size() >= 3) {
-        if (query[0] == "create" && query[1] == "table") {
-            auto t1 = Table(query[2]);
-            t1.createTableFile();
-        }
-    }
-}
 auto main() -> int {
-    fmt::print("HELP; EXIT;\n>> ");
+    fmt::print("HELP; EXIT;\n");
     auto query = std::vector<std::string>();
 
     while (true) {
-        auto input = std::string();
-        std::cin >> input;
-        toLowerCase(input);
-
-        if (input.back() == ';') {
-            query.push_back(input);
-            execute(query);
-            query.clear();
-            fmt::print(">> ");
-        }
-        query.push_back(input);
+        fmt::print(">> ");
+        std::string input;
+        std::getline(std::cin, input);
 
         if (input == "help;") {
             fmt::println("Helper\n1. CREATE TABLE <table_name>;\n2. DROP TABLE <table_name>");
         }
-        if (input == "exit;") {
+        else if (input == "exit;") {
             return 0;
+        } else {
+            execute(input);
         }
+
+
+
     }
 }

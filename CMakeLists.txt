@@ -19,6 +19,10 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(fmt)
 
 add_executable(Database ${SOURCES}
-        include/database.h)
+        include/database.h
+        src/helpers.cpp
+        include/helpers.h
+        src/handlers.cpp
+        include/handlers.h)
 target_link_libraries(Database fmt)
 
