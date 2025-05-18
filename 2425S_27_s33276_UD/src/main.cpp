@@ -7,6 +7,7 @@
 #include "helpers.h"
 
 
+
 #include <iostream>
 #include <regex>
 #include <string>
@@ -15,7 +16,7 @@
 
 
 auto execute(std::string const& input) {
-    auto query = toLowerCase(input);
+    std::string query = toLowerCase(input);
 
     query = std::regex_replace(query, std::regex(R"(^\s+|\s+$|;$)"), "");
 
@@ -61,10 +62,14 @@ auto main() -> int {
 
         if (input == "help;") {
             helpHandler();
-        } else if (input == "exit;") {
+        }
+        else if (input == "exit;") {
             return 0;
         } else {
             execute(input);
         }
+
+
+
     }
 }

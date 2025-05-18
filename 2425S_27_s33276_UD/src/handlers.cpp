@@ -9,7 +9,7 @@
 
 #include "fmt/xchar.h"
 
-auto createTableHandler(std::string const& query) -> void {
+auto createTableHandler(std::string const &query) -> void {
     // check "create table" query syntax
     if (!checkCreateTable(query)) {
         fmt::println("Invalid CREATE TABLE syntax");
@@ -90,7 +90,7 @@ auto createTableHandler(std::string const& query) -> void {
     fmt::print("Table '{}' created successfully\n", tableName);
 }
 
-auto alterTableHandler(std::string const& query) -> void {
+auto alterTableHandler(std::string const &query) -> void {
     if (checkAlterTable(query)) {
         fmt::println("Invalid ALTER TABLE syntax");
         return;
@@ -262,7 +262,7 @@ auto alterTableHandler(std::string const& query) -> void {
     fmt::println("Table altered successfully");
 }
 
-auto dropTableHandler(std::string const& query) -> void {
+auto dropTableHandler(std::string const &query) -> void {
     // checking "drop table" query syntax
     if (!checkDropTable(query)) {
         fmt::println("Invalid DROP TABLE syntax");
@@ -287,7 +287,7 @@ auto dropTableHandler(std::string const& query) -> void {
     }
 }
 
-auto selectHandler(std::string const& query) -> void {
+auto selectHandler(std::string const &query) -> void {
     if (!checkSelect(query)) {
         fmt::println("INVALID SELECT syntax");
         return;
@@ -442,7 +442,7 @@ auto selectHandler(std::string const& query) -> void {
     }
 }
 
-auto insertIntoHandler(std::string const& query) -> void {
+auto insertIntoHandler(std::string const &query) -> void {
     if (!checkInsertInto(query)) {
         fmt::println("Invalid insert into syntax");
         return;
@@ -584,7 +584,7 @@ auto insertIntoHandler(std::string const& query) -> void {
     fmt::println("Record added successfully");
 }
 
-auto updateHandler(std::string const& query) -> void {
+auto updateHandler(std::string const &query) -> void {
     if (!checkUpdate(query)) {
         fmt::println("Invalid update syntax");
         return;
@@ -737,7 +737,7 @@ auto updateHandler(std::string const& query) -> void {
     fmt::println("{} row(s) updated", updateCount);
 }
 
-auto deleteHandler(std::string const& query) -> void {
+auto deleteHandler(std::string const &query) -> void {
     if (!checkDelete(query)) {
         fmt::println("Invalid DELETE syntax");
         return;

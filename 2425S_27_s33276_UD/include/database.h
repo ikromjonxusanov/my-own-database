@@ -4,8 +4,13 @@
 
 enum ColumnType {
     INT,
+    FLOAT,
     STRING,
     BOOL,
+    DATE,
+    TIME,
+    DATETIME,
+    TIMESTAMP,
     UNKNOWN
 };
 
@@ -28,13 +33,13 @@ struct Column {
 struct Table {
     std::string name;
 
-    Table(std::string const& n) : name(n) {}
+    Table(std::string const &n) : name(n) {}
 
-    Table(std::string const& n, std::vector<Column> const& columns) : name(n), columns(columns) {}
+    Table(std::string const &n, std::vector<Column> const &columns) : name(n), columns(columns) {}
 
     ~Table() = default;
 
-    auto addColumn(std::string const& n, ColumnType const& t, bool const& pk, bool const& nn) const -> void;
+    auto addColumn(std::string const &n, ColumnType const &t, bool const &pk, bool const &nn) const -> void;
     auto commit() const -> void;
 
 private:
