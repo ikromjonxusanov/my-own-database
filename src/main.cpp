@@ -35,8 +35,20 @@ auto execute(std::string const& input) {
     } else if (query.starts_with("insert into")) {
         insertIntoHandler(query);
     } else {
-        std::cout << "[ERROR] Unsupported or invalid SQL command.\n";
+        std::cout << "Unsupported or invalid SQL command.\n";
     }
+}
+
+void helpHandler() {
+    fmt::println("Help!");
+    fmt::println("Supported commands:");
+    fmt::println("  CREATE TABLE <table> (col1 type [PRIMARY KEY] [NOT NULL], ...);");
+    fmt::println("  DROP TABLE <table>;");
+    fmt::println("  ALTER TABLE <table> DROP COLUMN <col>;");
+    fmt::println("  INSERT INTO <table> (col1, col2, ...) VALUES (val1, val2, ...);");
+    fmt::println("  UPDATE <table> SET col1=val1, ... [WHERE col=val];");
+    fmt::println("  DELETE FROM <table> [WHERE col=val];");
+    fmt::println("  SELECT col1, col2 FROM <table> [WHERE col=val];");
 }
 
 auto main() -> int {
@@ -49,7 +61,7 @@ auto main() -> int {
         std::getline(std::cin, input);
 
         if (input == "help;") {
-            fmt::println("Helper\n1. CREATE TABLE <table_name>;\n2. DROP TABLE <table_name>");
+            helpHandler();
         }
         else if (input == "exit;") {
             return 0;
